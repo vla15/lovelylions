@@ -22,12 +22,12 @@ pool.connection(function(err, client, done) {
   })
 
   myClient = client;
-  var ageQuery = format('SELECT * from numbers WHERE age = %L', age)
-  myClient.query(ageQuery, function (err, result) {
+  var queryStr = format('');
+  myClient.query(queryStr, function (err, result) {
     if (err) {
-      console.log(err)
+      console.log(err);
     }
-    console.log(result.rows[0])
+    console.log(result);
   });
 });
 
