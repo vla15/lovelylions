@@ -13,7 +13,9 @@ var config = {
 };
 
 var pool = new pg.Pool(config);
+
 var myClient;
+
 
 pool.connection(function(err, client, done) {
   if (err) console.log(err);
