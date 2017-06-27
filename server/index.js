@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.get('/testing', (req, res) => {
-  var str = 'insert into numbers values (9999)';
+  var str = 'select _path from torso where id = 2';
   db.query(str, (data) => {
     res.send(data);
   });

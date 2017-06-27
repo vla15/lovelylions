@@ -25,7 +25,10 @@ exports.query = function(queryStr, callback){
     .finally(() => {
         pgp.end();
     });
+
 };
+
+
 
 
 
