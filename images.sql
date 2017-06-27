@@ -1,3 +1,7 @@
+CREATE DATABASE image;
+
+USE image;
+
 CREATE TABLE artist(
    id      NUMERIC PRIMARY KEY,
    username    VARCHAR(20) NOT NULL,

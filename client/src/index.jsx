@@ -20,6 +20,7 @@ class App extends React.Component {
     this.switch = this.switch.bind(this);
   }
 
+
   switch(e) {
     e.preventDefault();
     var targetVal = e.target.innerText;
