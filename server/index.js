@@ -1,15 +1,19 @@
 var express = require('express');
 var db = require('../database/index.js');
+var bodyParser = require('body-parser');
 
 var app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.get('/testing', (req, res) => {
-  var str = 'select * from numbers';
-  db.connectPg(str, (data) => {
-    console.log('inside the func', data);
+  var str = 'insert into numbers values (9999)';
+  db.query(str, (data) => {
+    res.send(data);
   });
+ 
 });
 
 app.listen(3000, function() {
