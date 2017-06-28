@@ -5,6 +5,7 @@ import SignIn from './components/SignIn.jsx';
 import Gallery from './components/Gallery.jsx';
 import ReactDOM from 'react-dom';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +20,7 @@ class App extends React.Component {
     };
     this.switch = this.switch.bind(this);
   }
+
 
   switch(e) {
     e.preventDefault();
