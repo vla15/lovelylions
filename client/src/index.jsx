@@ -20,7 +20,10 @@ class App extends React.Component {
     this.switch = this.switch.bind(this);
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 'last commit'
   switch(e) {
     e.preventDefault();
     var targetVal = e.target.innerText;
@@ -47,8 +50,12 @@ class App extends React.Component {
           </div>
           {this.state.currentView}
         </div>
+<<<<<<< HEAD
       </div>
     );
+=======
+      </div>);
+>>>>>>> 'last commit'
   }
 }
 
