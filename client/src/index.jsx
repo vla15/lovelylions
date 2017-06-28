@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import ExquisiteWriter from './components/ExquisiteWriter.jsx';
 import DrawCanvas from './components/DrawCanvas.jsx';
 import SignIn from './components/SignIn.jsx';
 import Gallery from './components/Gallery.jsx';
+import ReactDOM from 'react-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,6 +33,7 @@ class App extends React.Component {
       this.setState({currentView: <Gallery pics={this.state.pics} />});
     }
   }
+
 
   render() {
     return (<div>
