@@ -5,6 +5,7 @@ import SignIn from './components/SignIn.jsx';
 import Gallery from './components/Gallery.jsx';
 import ReactDOM from 'react-dom';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,10 +21,7 @@ class App extends React.Component {
     this.switch = this.switch.bind(this);
   }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 'last commit'
   switch(e) {
     e.preventDefault();
     var targetVal = e.target.innerText;
@@ -50,12 +48,8 @@ class App extends React.Component {
           </div>
           {this.state.currentView}
         </div>
-<<<<<<< HEAD
       </div>
     );
-=======
-      </div>);
->>>>>>> 'last commit'
   }
 }
 
