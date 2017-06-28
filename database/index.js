@@ -1,7 +1,7 @@
-const promise = require('bluebird');
+const Promise = require('bluebird');
 const difference = require('underscore').difference;
 const options = {
-    promiseLib: promise
+    promiseLib: Promise
 };
 const pgp = require('pg-promise')(options);
 
@@ -29,42 +29,66 @@ exports.query = function(queryStr, callback){
 
 };
 
-let getRandomImage = (part) => {
+
+let getImage = (id, part, callback) => {
+
+  db.any(`select _path from ${part} where id = ${id}`)
+    .then(path => {
+      // console.log(path);
+      // return path[0]._path;
+      // console.log('this is consolelog', path[0]._path);
+      callback(path[0]._path);
+    })
+    .catch(err => {
+      console.log(err);
+  });
+
+}
+exports.getRandomImage = (part,callback) => {
+
   db.any(`select id from ${part} order by id desc limit 1`)
     .then(maxId => {
-      return Math.floor(Math.random * (maxID));
+      var id = maxId[0].id;
+      return Math.floor(Math.random() * (id)) + 1;
     })
     .then(id => {
-      return getImage(id, part);
+      // console.log(part);
+      // console.log(id);
+      getImage(id, part, callback);
     })
     .catch(error => {
       console.log(error);
-    });
+  });
+
 };
 
-let getImage = (id, part) => {
-  db.any(`select _path from ${part} where id = ${id}`)
-    .then(path => {
-      return path;
-    })
-    .catch(err => {
-      console.log(error);
-  });
-}
 
-exports.twoImages = function(part, callback) {
+exports.getTwoImages = function(part, callback) {
+
   let arr1 = ['head', 'torso', 'legs'];
-  let diff = _.difference(arr1, [part]);
+  let diff = difference(arr1, [part]);
   let partObj = {};
+
+  console.log(getRandomImage('head'));
 
   // iterate diff 
   diff.forEach((each) => {
     let obj = {};
-    obj['path'] = getRandomImage(each);
-    partObj[each] = obj;
+    getRandomImage(each, (data) => {
+      obj[each] = data;
+      partObj[each] = obj;
+    });
+  })
+  .then((data) => {
+    callback(data);
+  })
+  .catch((err) => {
+    callback(err);
   });
-  return partObj;
-}
+  
+
+};
+// {obj{head: abc_path}, obj{torso: def_path}}
 
 
 
