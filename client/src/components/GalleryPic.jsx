@@ -1,12 +1,12 @@
 import React from 'react';
 
-const GalleryPic = (props) => (
-  <div className="col-sm-6 col-lg-3 gallery-pic">
-    <img className="pic-part" src={props.pic.head} />
-    <img className="pic-part" src={props.pic.torso} />
-    <img className="pic-part" src={props.pic.legs} />
-    <h4>{props.pic.title}</h4>
-    <p>{props.pic.artists.join(', ')}</p>
+const GalleryPic = ({pic}) => (
+  <div className="col-xs-4 col-lg-3 gallery-pic">
+    <img className="pic-part" src={pic.head.path} />
+    <img className="pic-part" src={pic.torso.path} />
+    <img className="pic-part" src={pic.legs.path} />
+    <h4>{pic.title}</h4>
+    <p>{pic.head.artist}, {pic.torso.artist}, {pic.legs.artist}</p>
   </div>
 );
 

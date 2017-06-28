@@ -11,12 +11,10 @@ class App extends React.Component {
     this.state = {
       currentView: <DrawCanvas />,
       pics: [
-        {head: 'paper.png', torso: 'paper.png', legs: 'paper.png', title: 'Title', artists: ['artist1', 'artist2', 'artist3']},
-        {head: 'paper.png', torso: 'paper.png', legs: 'paper.png', title: 'Title', artists: ['artist1', 'artist2', 'artist3']},
-        {head: 'paper.png', torso: 'paper.png', legs: 'paper.png', title: 'Title', artists: ['artist1', 'artist2', 'artist3']},
-        {head: 'paper.png', torso: 'paper.png', legs: 'paper.png', title: 'Title', artists: ['artist1', 'artist2', 'artist3']},
-        {head: 'paper.png', torso: 'paper.png', legs: 'paper.png', title: 'Title', artists: ['artist1', 'artist2', 'artist3']},
-        {head: 'paper.png', torso: 'paper.png', legs: 'paper.png', title: 'Title', artists: ['artist1', 'artist2', 'artist3']}
+        {title: 'Title', head: {path:'paper.png', artist: 'artist1'}, torso: {path: 'paper.png', artist: 'artist2'}, legs: {path: 'paper.png', artist: 'artist3'}},
+        {title: 'Title', head: {path:'paper.png', artist: 'artist1'}, torso: {path: 'paper.png', artist: 'artist2'}, legs: {path: 'paper.png', artist: 'artist3'}},
+        {title: 'Title', head: {path:'paper.png', artist: 'artist1'}, torso: {path: 'paper.png', artist: 'artist2'}, legs: {path: 'paper.png', artist: 'artist3'}},
+        {title: 'Title', head: {path:'paper.png', artist: 'artist1'}, torso: {path: 'paper.png', artist: 'artist2'}, legs: {path: 'paper.png', artist: 'artist3'}}
       ]
     };
     this.switch = this.switch.bind(this);
@@ -36,20 +34,20 @@ class App extends React.Component {
 
 
   render() {
-    return (<div>
-      <div className="foreground">
-          <ExquisiteWriter />
-          <div className="container">
-            <div className="nav-bar">
-              <h1>Exquisite Corpse</h1>
-              <a href="#" onClick={this.switch}>canvas</a>
-              <a href="#" onClick={this.switch}>myGallery</a>
-              <a href="#" onClick={this.switch}>signIn</a>
-            </div>
-            {this.state.currentView}
+    return (
+      <div>
+        <ExquisiteWriter />
+        <div className="foreground">
+          <div className="nav-bar">
+            <h1>cadavre exquis</h1>
+            <a href="#" onClick={this.switch}>canvas</a>
+            <a href="#" onClick={this.switch}>myGallery</a>
+            <a href="#" onClick={this.switch}>signIn</a>
           </div>
+          {this.state.currentView}
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 

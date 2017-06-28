@@ -5,9 +5,7 @@ body {
 }
 
 .foreground {
-  position: relative;
-  min-height: 1000px;
-  min-width: 980px;
+  margin: 2% 5%;
 }
 
 .exquisite-writer {
@@ -27,19 +25,9 @@ body {
   font-family: 'Raleway Dots', cursive;
 }
 
-.stain {
-  padding-top: 50px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -2;
-  width: 100%;
-  opacity: .15;
-}
-
 .nav-bar {
+  width: 900px;
+  margin: 0 auto;
   color: #050505;
   text-align: left;
   background-color: rgba(255,255,255,.5);
@@ -62,12 +50,18 @@ body {
   position: relative;
 }
 
-.draw-canvas {
-  background-image: url("./paper.png");
-  background-size: cover;
-  padding: 47.92% 0 0;
+canvas {
+  display: flex;
+  margin: 0 auto;
   box-shadow: 0px 30px 40px rgba(0,0,0,.1);
   border-radius: 9px;
+  background-image: url("./paper.png");
+  background-size: cover;
+}
+
+.draw-canvas div {
+  display: table;
+  margin: 5px auto;
 }
 
 .sign-in {

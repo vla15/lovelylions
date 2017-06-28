@@ -4,8 +4,8 @@ import React from 'react';
 class DrawCanvas extends React.Component {
   constructor(props) {
     super(props);
-    this.width = 300;
-    this.height = 300;
+    this.width = 900;
+    this.height = 450;
     this.drawingPoints = [];
     this.isDrawing = false;
     this.scrollLeft = 0;
@@ -45,12 +45,12 @@ class DrawCanvas extends React.Component {
     this.drawingPoints.push({x: x, y: y, drag: drag})
   }
 
-  redraw() { 
+  redraw() {
     for (var i = 0; i < this.drawingPoints.length; i++) {
       this.context.beginPath();
       this.context.strokeStyle = "#000000";
       this.context.lineJoin = 'round';
-      this.context.lineWidth = 7;    
+      this.context.lineWidth = 7;
 
       if (this.drawingPoints[i].drag && i) {
         this.context.moveTo(this.drawingPoints[i - 1].x, this.drawingPoints[i - 1].y);
@@ -74,22 +74,28 @@ class DrawCanvas extends React.Component {
     this.context = this.canvas.getContext('2d');
     this.offsetLeft = this.canvas.offsetLeft;
     this.offsetTop = this.canvas.offsetTop;
+    window.onresize = (event => {
+      this.offsetLeft = this.canvas.offsetLeft;
+      this.offsetTop = this.canvas.offsetTop;
+    }).bind(this);
     document.addEventListener('scroll', (event) => {
       this.scrollLeft = document.body.scrollLeft;
       this.scrollTop = document.body.scrollTop;
-    })
+    });
   }
 
   render () {
     return (
-      <div className ="jumbotron draw-canvas">
+      <div className ="draw-canvas">
+        <canvas onMouseLeave={this.endDraw.bind(this)}
+          onMouseMove={this.drawing.bind(this)} onMouseDown={this.startDraw.bind(this)}
+          onMouseUp={this.endDraw.bind(this)} id='canvas' width={this.width} height={this.height}>
+        </canvas>
+        <div>
         <input onClick={this.onEraserClick.bind(this)} type="button" value="Eraser"></input>
         <input onClick={this.onDrawClick.bind(this)} type="button" value="Draw"></input>
         <input onClick={this.clearCanvas.bind(this)} type='button' value="Clear Canvas"></input>
-        <canvas onMouseLeave={this.endDraw.bind(this)} 
-        onMouseMove={this.drawing.bind(this)} onMouseDown={this.startDraw.bind(this)} 
-        onMouseUp={this.endDraw.bind(this)} id='canvas' width={this.width} height={this.height}>
-        </canvas>
+        </div>
       </div>
       )
   }
