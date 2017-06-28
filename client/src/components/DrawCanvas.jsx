@@ -9,7 +9,6 @@ class DrawCanvas extends React.Component {
     this.isDrawing = false;
     this.scrollLeft = 0;
     this.scrollTop = 0;
-
     this.state = {
       bodyPart: "head"
     }
@@ -117,6 +116,7 @@ class DrawCanvas extends React.Component {
           </select>
           <input onClick={this.submitImage.bind(this)} type="button" value="Done"></input>
         </div>
+        <div className="mouseCursor" left={this.cursorLeft} top={this.cursorTop} ></div>
       </div>
       )
   }

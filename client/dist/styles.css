@@ -81,3 +81,21 @@ canvas {
   max-width: 100%;
   max-height: auto;
 }
+
+.mouseCursor {
+  cursor: none;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  position: absolute;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  top: 100;
+  left: 100;
+  z-index: 10000;
+}
+
+#canvas {
+  cursor: none;
+}
