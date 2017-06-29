@@ -97,11 +97,9 @@ app.get('/images', (req, res) => {
 
 
 app.get('/testing', (req, res) => {
-
-  db.getTwoImages('leg', (data) => {
+  db.getTwoImages('head', (data) => {
     res.send(data);
   });
-
 });
 
 
