@@ -3,28 +3,42 @@ import React from 'react';
 class DrawCanvas extends React.Component {
   constructor(props) {
     super(props);
-    this.width = 900;
-    this.height = 450;
+    this.state = {
+      brushWidth: 5,
+      width: 900,
+      height: 450,
+      erasing: false,
+      bodyPart: "head"
+    }
     this.drawingPoints = [];
     this.isDrawing = false;
     this.scrollLeft = 0;
     this.scrollTop = 0;
-    this.state = {
-      bodyPart: "head"
-    }
   }
 
   onEraserClick() {
-    this.context.globalCompositeOperation = 'destination-out';
+    this.setState({
+      erasing: true
+    })
   }
 
   onDrawClick() {
-    this.context.globalCompositeOperation = 'source-over';
+    this.setState({
+      erasing: false
+    })
+  }
+
+  updateBrushWidth(event) {
+    this.setState({
+      brushWidth: event.target.value
+    })
   }
 
   startDraw(event) {
+    var left = event.clientX - this.offsetLeft + this.scrollLeft;
+    var top = event.clientY - this.offsetTop + this.scrollTop;
     this.isDrawing = true;
-    this.addToDrawingEvents(event.clientX - this.offsetLeft + this.scrollLeft, event.clientY - this.offsetTop + this.scrollTop, true);
+    this.addToDrawingEvents(left, top, true);
     this.redraw();
   }
 
@@ -37,8 +51,10 @@ class DrawCanvas extends React.Component {
   }
 
   drawing(event) {
+    var left = event.clientX - this.offsetLeft + this.scrollLeft;
+    var top = event.clientY - this.offsetTop + this.scrollTop;
     if (this.isDrawing) {
-      this.addToDrawingEvents(event.clientX - this.offsetLeft + this.scrollLeft, event.clientY - this.offsetTop + this.scrollTop, true);
+      this.addToDrawingEvents(left, top, true);
       this.redraw();
     }
   }
@@ -50,9 +66,10 @@ class DrawCanvas extends React.Component {
   redraw() {
     for (var i = 0; i < this.drawingPoints.length; i++) {
       this.context.beginPath();
+      this.state.erasing ? this.context.globalCompositeOperation = 'destination-out' : this.context.globalCompositeOperation = 'source-over';
       this.context.strokeStyle = "#000000";
       this.context.lineJoin = 'round';
-      this.context.lineWidth = 7;
+      this.context.lineWidth = this.state.brushWidth;
 
       if (this.drawingPoints[i].drag && i) {
         this.context.moveTo(this.drawingPoints[i - 1].x, this.drawingPoints[i - 1].y);
@@ -66,7 +83,7 @@ class DrawCanvas extends React.Component {
   }
 
   clearCanvas(event) {
-    this.context.clearRect(0, 0, this.width, this.height);
+    this.context.clearRect(0, 0, this.state.width, this.state.height);
     this.drawingPoints = [];
     this.context.save();
   }
@@ -83,6 +100,7 @@ class DrawCanvas extends React.Component {
 
   componentDidMount() {
     this.canvas = document.getElementById('canvas');
+    this.mouse = document.getElementById('mouseCursor');
     this.context = this.canvas.getContext('2d');
     this.offsetLeft = this.canvas.offsetLeft;
     this.offsetTop = this.canvas.offsetTop;
@@ -97,16 +115,23 @@ class DrawCanvas extends React.Component {
   }
 
   render () {
+    var style = {}
+    this.state.erasing ? style.cursor = 'url(eraser.cur) 15 15, auto' : style.cursor = 'url(brush.cur), auto'
     return (
       <div className ="draw-canvas">
-        <canvas onMouseLeave={this.endDraw.bind(this)}
+        <canvas
+          style={style}
           onMouseMove={this.drawing.bind(this)} onMouseDown={this.startDraw.bind(this)}
-          onMouseUp={this.endDraw.bind(this)} id='canvas' width={this.width} height={this.height}>
+          onMouseUp={this.endDraw.bind(this)} id='canvas' width={this.state.width} height={this.state.height}>
         </canvas>
         <div className="button-cluster">
-          <input onClick={this.onEraserClick.bind(this)} type="button" value="Eraser"></input>
-          <input onClick={this.onDrawClick.bind(this)} type="button" value="Draw"></input>
-          <input onClick={this.clearCanvas.bind(this)} type="button" value="Clear Canvas"></input>
+          <img onClick={this.onEraserClick.bind(this)} className="eraser" src="erasericon.png"></img>
+          <img onClick={this.onDrawClick.bind(this)} className="drawBrush" src="brushicon.png"></img>
+          <input onClick={this.clearCanvas.bind(this)} type='button' value="Clear Canvas"></input>
+          <span>Brush size: {this.state.brushWidth}</span>
+          <input className="size-slider" onChange={this.updateBrushWidth.bind(this)} 
+          value={this.state.brushWidth} 
+          type="range" min="5" max="25" step="1"></input>
         </div>
         <div className="button-cluster">
           <select onChange={this.changePart.bind(this)}>
@@ -116,7 +141,6 @@ class DrawCanvas extends React.Component {
           </select>
           <input onClick={this.submitImage.bind(this)} type="button" value="Done"></input>
         </div>
-        <div className="mouseCursor" left={this.cursorLeft} top={this.cursorTop} ></div>
       </div>
       )
   }

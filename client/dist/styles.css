@@ -72,6 +72,53 @@ canvas {
 
 }
 
+@-webkit-keyframes highlight {
+  0% {
+    background: #e6f7ff;
+  }
+  100% {
+    background: none;
+  }
+}
+.drawBrush {
+  border: solid black 1px;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.drawBrush:hover {
+  background-image: linear-gradient(to bottom, #c3e3fa, #a5defb)
+}
+
+.drawBrush:active {
+  animation-name: highlight;
+  animation-duration: 1s;
+  transition: ;
+}
+
+.eraser {
+  border: solid black 1px;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.eraser:hover {
+  background-image: linear-gradient(to bottom, #c3e3fa, #a5defb)
+}
+
+.eraser:active {
+  animation-name: highlight;
+  animation-duration: 1s;
+  transition: ;
+}
+
+.size-slider {
+  height: 25px;
+  width: 25px;
+}
+
 .gallery-pic {
   display: inline-block;
   padding: 20px;
@@ -80,22 +127,4 @@ canvas {
 .pic-part {
   max-width: 100%;
   max-height: auto;
-}
-
-.mouseCursor {
-  cursor: none;
-  width: 10px;
-  height: 10px;
-  background: transparent;
-  position: absolute;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  top: 100;
-  left: 100;
-  z-index: 10000;
-}
-
-#canvas {
-  cursor: none;
 }
