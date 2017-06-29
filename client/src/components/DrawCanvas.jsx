@@ -109,6 +109,7 @@ class DrawCanvas extends React.Component {
   }
 
   componentDidMount() {
+    //selects the DOM elements and exposes the HTML 5 canvas context obj
     this.canvas = document.getElementById('canvas');
     this.mouse = document.getElementById('mouseCursor');
     this.context = this.canvas.getContext('2d');
@@ -125,6 +126,7 @@ class DrawCanvas extends React.Component {
   }
 
   render () {
+    //sets cursor styling
     var style = {}
     this.state.erasing ? style.cursor = 'url(eraser.cur) 15 15, auto' : style.cursor = 'url(brush.cur), auto'
     return (
