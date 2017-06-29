@@ -8,6 +8,8 @@ class DrawCanvas extends React.Component {
       width: 900,
       height: 450,
       erasing: false,
+      eColor: 'transparent',
+      dColor: 'transparent',
       bodyPart: "head"
     }
     this.drawingPoints = [];
@@ -18,13 +20,17 @@ class DrawCanvas extends React.Component {
 
   onEraserClick() {
     this.setState({
-      erasing: true
+      erasing: true,
+      eColor: '#33adff',
+      dColor: 'transparent'
     })
   }
 
   onDrawClick() {
     this.setState({
-      erasing: false
+      erasing: false,
+      eColor: 'transparent',
+      dColor: '#33adff'
     })
   }
 
@@ -86,6 +92,10 @@ class DrawCanvas extends React.Component {
     this.context.clearRect(0, 0, this.state.width, this.state.height);
     this.drawingPoints = [];
     this.context.save();
+    this.setState({
+      eColor: 'transparent',
+      dColor: 'transparent'
+    })
   }
 
   submitImage(event) {
@@ -125,11 +135,11 @@ class DrawCanvas extends React.Component {
           onMouseUp={this.endDraw.bind(this)} id='canvas' width={this.state.width} height={this.state.height}>
         </canvas>
         <div className="button-cluster">
-          <img onClick={this.onEraserClick.bind(this)} className="eraser" src="erasericon.png"></img>
-          <img onClick={this.onDrawClick.bind(this)} className="drawBrush" src="brushicon.png"></img>
-          <input onClick={this.clearCanvas.bind(this)} type='button' value="Clear Canvas"></input>
+          <img style={{'backgroundColor': this.state.eColor}} onClick={this.onEraserClick.bind(this)} className="eraser" src="erasericon.png"></img>
+          <img style={{'backgroundColor': this.state.dColor}} onClick={this.onDrawClick.bind(this)} className="drawBrush" src="brushicon.png"></img>
+          <input className="clearBtn" onClick={this.clearCanvas.bind(this)} type='button' value="Clear"></input>
           <span>Brush size: {this.state.brushWidth}</span>
-          <input className="size-slider" onChange={this.updateBrushWidth.bind(this)} 
+          <input onChange={this.updateBrushWidth.bind(this)} 
           value={this.state.brushWidth} 
           type="range" min="5" max="25" step="1"></input>
         </div>

@@ -82,8 +82,9 @@ canvas {
 }
 .drawBrush {
   border: solid black 1px;
-  height: 25px;
-  width: 25px;
+  height: 27px;
+  width: 27px;
+  margin-bottom: 2px;
   cursor: pointer;
 }
 
@@ -99,8 +100,9 @@ canvas {
 
 .eraser {
   border: solid black 1px;
-  height: 25px;
-  width: 25px;
+  height: 27px;
+  width: 27px;
+  margin-bottom: 2px;
   cursor: pointer;
 }
 
@@ -114,14 +116,23 @@ canvas {
   transition: ;
 }
 
-.size-slider {
-  height: 25px;
-  width: 25px;
+.brushWidth {
+  display: block;
+  height: 27px;
+  width: auto;
+  border: solid black 1px;
+}
+
+.clearBtn {
+  border: solid black 1px;
 }
 
 .gallery-pic {
-  display: inline-block;
+  text-align: justify;
   padding: 20px;
+}
+.brushSpan {
+  padding-left: 2px
 }
 
 .pic-part {
