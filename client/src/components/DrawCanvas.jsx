@@ -10,6 +10,10 @@ class DrawCanvas extends React.Component {
     this.isDrawing = false;
     this.scrollLeft = 0;
     this.scrollTop = 0;
+
+    this.state = {
+      bodyPart: "head"
+    }
   }
 
   onEraserClick() {
@@ -69,6 +73,16 @@ class DrawCanvas extends React.Component {
     this.context.save();
   }
 
+  submitImage(event) {
+    var userImage = {};
+    userImage[this.state.bodyPart] = {path: this.canvas.toDataURL("image/png")}
+    this.props.generateImage(userImage);
+  }
+
+  changePart(event) {
+    this.setState({bodyPart: event.target.value});
+  }
+
   componentDidMount() {
     this.canvas = document.getElementById('canvas');
     this.context = this.canvas.getContext('2d');
@@ -91,10 +105,18 @@ class DrawCanvas extends React.Component {
           onMouseMove={this.drawing.bind(this)} onMouseDown={this.startDraw.bind(this)}
           onMouseUp={this.endDraw.bind(this)} id='canvas' width={this.width} height={this.height}>
         </canvas>
-        <div>
-        <input onClick={this.onEraserClick.bind(this)} type="button" value="Eraser"></input>
-        <input onClick={this.onDrawClick.bind(this)} type="button" value="Draw"></input>
-        <input onClick={this.clearCanvas.bind(this)} type='button' value="Clear Canvas"></input>
+        <div className="button-cluster">
+          <input onClick={this.onEraserClick.bind(this)} type="button" value="Eraser"></input>
+          <input onClick={this.onDrawClick.bind(this)} type="button" value="Draw"></input>
+          <input onClick={this.clearCanvas.bind(this)} type="button" value="Clear Canvas"></input>
+        </div>
+        <div className="button-cluster">
+          <select onChange={this.changePart.bind(this)}>
+            <option value="head">head</option>
+            <option value="torso">torso</option>
+            <option value="legs">legs</option>
+          </select>
+          <input onClick={this.submitImage.bind(this)} type="button" value="Done"></input>
         </div>
       </div>
       )
