@@ -4,7 +4,7 @@ import DrawCanvas from './components/DrawCanvas.jsx';
 import SignIn from './components/SignIn.jsx';
 import Gallery from './components/Gallery.jsx';
 import ReactDOM from 'react-dom';
-import Composite from './components/Composite.jsx';
+import Composite from './components/composite.jsx';
 
 var testURL = '/images/?file=legs.png'
 
