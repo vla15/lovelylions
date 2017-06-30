@@ -9,7 +9,7 @@
   },
   "scripts": {
     "postinstall": "webpack -p", 
-    "dev": "webpack -p; nodemon server/index.js",
+    "dev": "webpack -d --watch; nodemon server/index.js",
     "start": "node server/index.js"
   },
   "dependencies": {
