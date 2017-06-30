@@ -1,4 +1,4 @@
-
+CREATE SCHEMA public;
 
 CREATE TABLE artist(
    id   SERIAL PRIMARY KEY,
@@ -39,6 +39,7 @@ CREATE TABLE final_image (
 -- insert into artist (username, email)  values ( 'lisa', 'lisa@ymail.com' );
 -- insert into artist (username, email)  values ( 'jenny', 'jenny@ymail.com' );
 -- insert into artist (username, email)  values ( 'cathy', 'cathy@ymail.com' );
+insert into artist (username, email, facebookId, token, name) values ('dummy', 'dummyemail@test.com', 'dummyuser', 'NA', 'dummyperson');
 insert into torso (_path, user_id )  values ( 'abc_path', 1 );
 insert into torso (_path, user_id )  values ( 'def_path', 1 );
 insert into legs (_path, user_id )  values ( 'ghi_path', 1 );

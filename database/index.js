@@ -8,10 +8,13 @@ const cn = {
     host: 'localhost',
     port: 5432,
     database: 'mydb',
-    user: 'postgres',
-    password: 'postgres'
+    user: 'vincentla',
+    password: ''
 };
-const db = pgp(cn);
+if (process.env.DATABASE_URL) {
+  pgp.pg.defaults.ssl = true;
+};
+const db = pgp(process.env.DATABASE_URL || cn);
 
 exports.db = db;
 
@@ -82,32 +85,6 @@ let getTwoImages = (part, callback) => {
 
 
 };
-
-// var mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/exquisite');
-
-// var db = mongoose.connection;
-
-// db.on('error', function() {
-//   console.log('mongoose connection error');
-// });
-
-// db.once('open', function() {
-//   console.log('mongoose connected successfully');
-// });
-
-// var userSchema = mongoose.Schema({  
-//   facebook: {
-//     id: String,
-//     token: String,
-//     email: String,
-//     name: String,
-//     username: String,
-//   }
-// });
-// module.exports = mongoose.model('User', userSchema);
-// {obj{head: abc_path}, obj{torso: def_path}}
-
 
 
 
