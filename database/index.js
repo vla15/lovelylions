@@ -14,14 +14,9 @@ const cn = {
 const db = pgp(cn);
 
 exports.db = db;
-exports.query = function(queryStr, callback){
 
 
 let query = function(queryStr, callback){
-
-
-  db.any(queryStr, [true])
-
   // simple function for querying the db
   db.query(queryStr)
 
@@ -33,8 +28,8 @@ let query = function(queryStr, callback){
    });
 };
 
-let getImage = (id, part, callback) => {
 
+let getImage = (id, part, callback) => {
   //helper function, get image from particular table with specfic id(PRIMARY KEY)
   db.any(`select _path from ${part} where id = ${id}`)
     .then(path => {
@@ -43,17 +38,14 @@ let getImage = (id, part, callback) => {
     .catch(err => {
       console.log(err);
   });
-
-
-}
-
 };
+
+
+
 
 
 let getRandomImage = (part,callback) => {
 
-
-exports.getRandomImage = (part,callback) => {
   db.any(`select id from ${part} order by id desc limit 1`)
     .then(maxId => {
       var id = maxId[0].id;
@@ -68,20 +60,7 @@ exports.getRandomImage = (part,callback) => {
 };
 
 
-exports.getTwoImages = function(part, callback) {
-  let arr1 = ['head', 'torso', 'legs'];
-  let diff = difference(arr1, [part]);
-  let partObj = {};
 
-  console.log(getRandomImage('head'));
-  // iterate diff 
-  diff.forEach((each) => {
-    let obj = {};
-    getRandomImage(each, (data) => {
-      obj[each] = data;
-      partObj[each] = obj;
-
-exports.getTwoImages = (part, callback) => {
 
 let getTwoImages = (part, callback) => {
   // provide the part of body and this function will return two random image fragments of the other two parts.
@@ -131,7 +110,6 @@ let getTwoImages = (part, callback) => {
 
 
 
-};
 
 
 let savePartImage = (userId, part, path) => {
@@ -160,5 +138,4 @@ module.exports = {
   getAllFinalImagesOfArtist: getAllFinalImagesOfArtist
 };
 
- 
- 
+
