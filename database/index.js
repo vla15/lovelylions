@@ -16,9 +16,6 @@ if (process.env.DATABASE_URL) {
 };
 const db = pgp(process.env.DATABASE_URL || cn);
 
-exports.db = db;
-
-
 let query = function(queryStr, callback){
   // simple function for querying the db
   db.query(queryStr)
@@ -112,7 +109,8 @@ module.exports = {
   getRandomImage: getRandomImage,
   getTwoImages: getTwoImages,
   savePartImage: savePartImage,
-  getAllFinalImagesOfArtist: getAllFinalImagesOfArtist
+  getAllFinalImagesOfArtist: getAllFinalImagesOfArtist,
+  db: db
 };
 
 
