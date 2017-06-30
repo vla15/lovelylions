@@ -3,7 +3,7 @@ var db = require('../database/index.js');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var crypto = require('crypto');
-
+var session = require('express-session');
 var app = express();
 var port = process.env.PORT || 3000;
 
@@ -23,7 +23,7 @@ var session = require('express-session');
 require('../config/passport.js')(passport);
 app.use(logger('dev'));
 app.use(cookieParser());
-app.use(express.session({ secret: 'keyboard cat' }));
+app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
@@ -88,6 +88,8 @@ app.post('/save', (req, res) => {
   var fileName = generateFilename(base64Data);
   fs.writeFile(`./server/images/${fileName}.png`, base64Data, 'base64', (err) => {
     if (err) console.log(err);
+    req.body[req.query.part].path = `./images/${fileName}`;
+    res.end();
   });
 });
 
@@ -95,15 +97,6 @@ app.get('/images', (req, res) => {
   var file = req.query.path;
   res.sendFile(`${__dirname}/images/${file}`, () => res.end());
 });
-
-
-
-app.get('/testing', (req, res) => {
-  db.getTwoImages('head', (data) => {
-    res.send(data);
-  });
-});
-
 
 app.listen(port, function() {
   console.log(`listening on port ${port}!`);

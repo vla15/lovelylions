@@ -1,4 +1,3 @@
-CREATE SCHEMA public;
 
 CREATE TABLE artist(
    id   SERIAL PRIMARY KEY,
