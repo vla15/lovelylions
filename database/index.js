@@ -11,6 +11,7 @@ const cn = {
     user: 'vincentla',
     password: ''
 };
+
 if (process.env.DATABASE_URL) {
   pgp.pg.defaults.ssl = true;
 };
@@ -28,8 +29,8 @@ let query = function(queryStr, callback){
    });
 };
 
-
 let getImage = (id, part, callback) => {
+
   //helper function, get image from particular table with specfic id(PRIMARY KEY)
   db.any(`select _path from ${part} where id = ${id}`)
     .then(path => {
@@ -39,6 +40,7 @@ let getImage = (id, part, callback) => {
       console.log(err);
   });
 };
+
 
 
 
@@ -79,6 +81,8 @@ let getTwoImages = (part, callback) => {
 
     });
   });
+
+
 
 
 };

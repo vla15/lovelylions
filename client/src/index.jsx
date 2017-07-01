@@ -11,8 +11,16 @@ var testURL = '/images/?file=legs.png'
 class App extends React.Component {
   constructor(props) {
     super(props);
+    //setting username
+    var param_array = window.location.href.split('username=');
+    var name;
+    if(param_array[1]) {
+      name = param_array[1].replace('#_=_','');
+      name = name.replace(/%20/g, " ");
+    }
+    //
     this.state = {
-      login: null,
+      login: name ? name : null,
       currentView: <DrawCanvas generateImage={this.generateImage.bind(this)}/>,
       pics: []
     };
