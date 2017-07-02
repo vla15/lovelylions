@@ -36,7 +36,6 @@ CREATE TABLE final_image (
     user_id     INTEGER references artist(id)
 );
 
-insert into artist (username, email, facebookId, token, name)  values ( 'regina', 'regina@ymail.com', 'reginaFB', 'token1234', 'regina' );
 insert into artist (username, email, facebookId, token, name) values ('dummy', 'dummyemail@test.com', 'dummyuser', 'NA', 'dummyperson');
 insert into torso (_path, user_id )  values ( 'images?path=torso.png', 1 );
 insert into legs (_path, user_id )  values ( 'images?path=legs.png', 1 );
