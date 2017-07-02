@@ -1,6 +1,6 @@
 # Exquiste Corpse
 
-> Pithy project description
+> An online version of the parlour game in which a drawing is assembled through a collection of images.  Each artist will collabora
 
 ## Team
 

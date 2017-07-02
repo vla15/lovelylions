@@ -69,8 +69,6 @@ app.get('/gallery', (req, res) => {
       res.end(JSON.stringify(galleryImages));
     });
   });
-
-
 });
 
 app.get('/generate', (req, res) => {
