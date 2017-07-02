@@ -6,6 +6,7 @@ class Composite extends React.Component {
     console.log('inside composite component: ', this.props.pic);
     var canvas = document.querySelector('canvas');
     var context = canvas.getContext('2d');
+    console.log(this.props.pic);
     var picObj = this.props.pic;
     var head = new Image(300, 150);
     var torso = new Image(300, 150);

@@ -8,7 +8,7 @@ const cn = {
     host: 'localhost',
     port: 5432,
     database: 'mydb',
-    user: 'derek',
+    user: 'vincentla',
     password: ''
 };
 
@@ -98,10 +98,11 @@ let savePartImage = (userId, part, path, callback) => {
   })
 };
 
-
 let saveImageToFinalImage = (obj, part, path, callback) => {
   //obj = request.body, part = req.query.part , path is generate before
   // the invocation of this function.
+  console.log(obj);
+  console.log('image part');
   let username = obj[part]['artist'];
   let userId;
   getUserId(username, (data) => {
