@@ -10,7 +10,6 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/../client/dist'));
-// app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
@@ -27,7 +26,7 @@ require('../config/passport.js')(passport);
 
 app.use(logger('dev'));
 app.use(cookieParser());
-app.use(session({ secret: 'keyboard cat' }));
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
@@ -40,8 +39,6 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 
 
 app.get('/profile', isLoggedIn, function(req, res) {  
-  //console.log(req.user);
-  //res.send(req.user);
   res.redirect('/?username=' + req.user[0]['name']);
 });
 
@@ -81,14 +78,8 @@ app.get('/gallery', (req, res) => {
 
 app.get('/generate', (req, res) => {
   var userPart = req.query.part;
-  console.log('user body part', userPart);
-  // var DUMMY_PIC_DATA = {
-  //   title: 'Title',
-  //   head: {path:'head.png', artist: 'artist1'},
-  //   torso: {path: 'torso.png', artist: 'artist2'},
-  //   legs: {path: 'legs.png', artist: 'artist3'}
-  // };
   db.getTwoImages(userPart, (data) => {
+    console.log('get two images data: ', data)
     res.send(JSON.stringify(data));
   });
   //call getTwoImages func, pass in userPart;
@@ -103,21 +94,11 @@ app.post('/save', (req, res) => {
   fs.writeFile(`./server/images/${fileName}.png`, base64Data, 'base64', (err) => {
     if (err) console.log(err);
 
-    req.body[req.query.part].path = `./images/${fileName}`;
-    let thePath = `./images/${fileName}`;
-    // db.saveImageToFinalImage(req.body, req.query.part, thePath, (data) => {
-    //   res.end();
-    // });
-    console.log('the req body', req.body);
-    console.log('the part', req.query.part);
-    console.log('path', thePath);
-  });
-});
-
-app.get('/testing', (req, res) => {
-  db.saveImageToFinalImage(db.dummyData, 'head', 'testingtestingpath', (data) => {
-    res.send(data);
-    res.end();
+    req.body[req.query.part].path = `./images/${fileName}.png`;
+    let thePath = `images?path=${fileName}.png`;
+    db.saveImageToFinalImage(req.body, req.query.part, thePath, (data) => {
+      res.end();
+    });
   });
 });
 
