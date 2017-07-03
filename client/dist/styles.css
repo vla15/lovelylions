@@ -79,12 +79,16 @@ canvas {
   margin: 5px auto;
 }
 
+.user-button .login {
+  font-weight: bold;
+}
+
 .user-button:hover .login {
   visibility: hidden;
 }
 
 .user-button:hover .logout:before {
-  content: "Logout";
+  content: "logout";
 }
 
 .gallery-pic p {

@@ -45,9 +45,9 @@ class App extends React.Component {
     }
   }
 
-  fetchGallery() {
-    fetch(`/gallery?username=${this.state.login}`).then(res => res.json())
-      .then(galleryImages => this.setState({currentView: <Gallery pics={galleryImages} />}));
+  fetchGallery(artist = this.state.login) {
+    fetch(`/gallery?username=${artist}`).then(res => res.json())
+      .then(galleryImages => this.setState({currentView: <Gallery pics={galleryImages} fetchGallery={this.fetchGallery.bind(this)}/>}));
   }
 
   generateImage(userImage) {
@@ -80,14 +80,14 @@ class App extends React.Component {
             <a href="#" onClick={this.componentSwitch}>canvas</a>
             {this.state.login ? (
               <span>
-                <a href="#" onClick={this.componentSwitch}>myGallery</a>
+                <a href="#" onClick={this.componentSwitch}>gallery</a>
                 <a className="user-button" href="/logout">
-                  <span className="login">{this.state.login}</span>
+                  <span className="login">{this.state.login.toLowerCase()}</span>
                   <span className="logout"></span>
                 </a>
               </span>
             ) : (
-              <a href="/auth/facebook" >signIn</a>
+              <a href="/auth/facebook" >login</a>
             )}
           </div>
           {this.state.currentView}
