@@ -12,10 +12,6 @@ var port = process.env.PORT || 3000;
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json({limit: '5mb'}));
 
-<<<<<<< HEAD
-=======
-//saloni code for authentication start
->>>>>>> Finishing touches
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -39,7 +35,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 }));
 
 
-app.get('/profile', isLoggedIn, function(req, res) {  
+app.get('/profile', isLoggedIn, function(req, res) {
   res.redirect('/?username=' + req.user[0]['name']);
 });
 

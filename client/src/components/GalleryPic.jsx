@@ -13,12 +13,12 @@ class GalleryPic extends React.Component {
   render() {
     return (
       <div className="col-xs-4 col-lg-3 gallery-pic">
-        <img className="pic-part" src={pic.head.path} />
-        <img className="pic-part" src={pic.torso.path} />
-        <img className="pic-part" src={pic.legs.path} />
-        <a href="#" onClick={this.selectArtist.bind(this)}>{pic.head.artist}</a>
-        <a href="#" onClick={this.selectArtist.bind(this)}>{pic.torso.artist}</a>
-        <a href="#" onClick={this.selectArtist.bind(this)}>{pic.legs.artist}</a>
+        <img className="pic-part" src={this.props.pic.head.path} />
+        <img className="pic-part" src={this.props.pic.torso.path} />
+        <img className="pic-part" src={this.props.pic.legs.path} />
+        <a href="#" onClick={this.selectArtist.bind(this)}>{this.props.pic.head.artist}</a>
+        <a href="#" onClick={this.selectArtist.bind(this)}>{this.props.pic.torso.artist}</a>
+        <a href="#" onClick={this.selectArtist.bind(this)}>{this.props.pic.legs.artist}</a>
       </div>
     );
   }

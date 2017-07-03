@@ -47,10 +47,13 @@ body {
   font-size: 36pt;
 }
 
-.nav-bar a {
-  margin: -5px 8px;
-  font-size: 16pt;
+a {
   color: #050505;
+}
+
+.nav-bar a {
+  font-size: 16pt;
+  margin: -5px 8px;
   float: right;
 }
 
@@ -91,9 +94,9 @@ canvas {
   content: "logout";
 }
 
-.gallery-pic p {
+.gallery-pic a {
+  display: block;
   text-align: center;
-  margin-top: 0px;
   margin: 0;
 }
 

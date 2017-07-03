@@ -36,18 +36,16 @@ class App extends React.Component {
   componentSwitch(e) {
     e.preventDefault();
     var targetVal = e.target.innerText;
-    if (targetVal === 'signIn') {
-      this.setState({currentView: <SignIn />});
-    } else if (targetVal === 'canvas') {
+    if (targetVal === 'canvas') {
       this.setState({currentView: <DrawCanvas generateImage={this.generateImage.bind(this)}/>});
-    } else if (targetVal === 'myGallery') {
+    } else if (targetVal === 'gallery') {
       this.fetchGallery();
     }
   }
 
   fetchGallery(artist = this.state.login) {
     fetch(`/gallery?username=${artist}`).then(res => res.json())
-      .then(galleryImages => this.setState({currentView: <Gallery pics={galleryImages} fetchGallery={this.fetchGallery.bind(this)}/>}));
+      .then(galleryImages => this.setState({currentView: <Gallery galleryOwner={artist} pics={galleryImages} fetchGallery={this.fetchGallery.bind(this)}/>}));
   }
 
   generateImage(userImage) {
@@ -55,9 +53,10 @@ class App extends React.Component {
     fetch(`/generate?part=${userPart}`).then(res => res.json())
       .then(generatedImage => {
         generatedImage[userPart] = userImage[userPart];
+        this.setState({currentView: ''});
         this.setState({
           currentView: <Composite pic={generatedImage} userPart={userPart} generateImage={this.generateImage} saveImage={this.saveComposite} login={this.state.login}/>
-        })
+        });
       });
   }
 
@@ -67,7 +66,7 @@ class App extends React.Component {
       'method': 'POST',
       'headers': {'Content-Type': 'application/json'},
       'body': JSON.stringify(compositeImage)
-    }).then(() => this.fetchGallery());
+    }).then(() => this.fetchGallery())
   }
 
   render() {
