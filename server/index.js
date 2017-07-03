@@ -12,6 +12,10 @@ var port = process.env.PORT || 3000;
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json({limit: '5mb'}));
 
+<<<<<<< HEAD
+=======
+//saloni code for authentication start
+>>>>>>> Finishing touches
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
