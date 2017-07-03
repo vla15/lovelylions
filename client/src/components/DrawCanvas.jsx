@@ -4,7 +4,11 @@ class DrawCanvas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       brushWidth: 7,
+=======
+      brushWidth: 15,
+>>>>>>> Finishing touches
       width: 900,
       height: 450,
       erasing: false,
@@ -73,7 +77,10 @@ class DrawCanvas extends React.Component {
       if (this.drawingPoints.length === 1) {
         this.context.beginPath();
         this.context.strokeStyle = '#000000 ';
+<<<<<<< HEAD
 
+=======
+>>>>>>> Finishing touches
         this.context.arc(this.drawingPoints[0].x, this.drawingPoints[0].y, Math.floor(this.state.brushWidth / 2), 0, Math.PI * 2);
         this.context.fill();
       } else {
