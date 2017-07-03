@@ -12,14 +12,12 @@ var port = process.env.PORT || 3000;
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json({limit: '5mb'}));
 
-//saloni code for authentication start
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var router = express.Router();
-//var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 require('../config/passport.js')(passport);
 
@@ -55,7 +53,6 @@ function isLoggedIn(req, res, next) {
 }
 
 
-
 var generateFilename = (fileData) => {
   var hash = crypto.createHash('sha256');
   hash.update(fileData);
@@ -74,7 +71,6 @@ app.get('/gallery', (req, res) => {
 app.get('/generate', (req, res) => {
   var userPart = req.query.part;
   db.getTwoImages(userPart, (data) => {
-    console.log('get two images data: ', data)
     res.send(JSON.stringify(data));
   });
 });

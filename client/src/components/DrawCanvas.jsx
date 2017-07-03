@@ -70,30 +70,32 @@ class DrawCanvas extends React.Component {
   }
 
   redraw() {
-    if (this.drawingPoints.length === 1) {
-      this.context.beginPath();
-      this.context.strokeStyle = '#000000';
-      this.context.arc(this.drawingPoints[0].x, this.drawingPoints[0].y, Math.floor(this.state.brushWidth / 2), 0, Math.PI * 2);
-      this.context.fill();
-    } else {
-      for (var i = 0; i < this.drawingPoints.length; i++) {
+      if (this.drawingPoints.length === 1) {
         this.context.beginPath();
-        this.state.erasing ? this.context.globalCompositeOperation = 'destination-out' : this.context.globalCompositeOperation = 'source-over';
-        this.context.strokeStyle = "#000000";
-        this.context.lineJoin = 'round';
-        this.context.lineWidth = this.state.brushWidth;
+        this.context.strokeStyle = '#000000 ';
 
-        if (this.drawingPoints[i].drag && i) {
-          this.context.moveTo(this.drawingPoints[i - 1].x, this.drawingPoints[i - 1].y);
-        } else {
-          this.context.moveTo(this.drawingPoints[i].x, this.drawingPoints[i].y);
+        this.context.arc(this.drawingPoints[0].x, this.drawingPoints[0].y, Math.floor(this.state.brushWidth / 2), 0, Math.PI * 2);
+        this.context.fill();
+      } else {
+        for (var i = 0; i < this.drawingPoints.length; i++) {
+          this.context.beginPath();
+          this.state.erasing ? this.context.globalCompositeOperation = 'destination-out' : this.context.globalCompositeOperation = 'source-over';
+          this.context.strokeStyle = "#000000 ";
+          this.context.lineJoin = 'round';
+          this.context.lineWidth = this.state.brushWidth;
+
+         if (this.drawingPoints[i].drag && i) {
+            this.context.moveTo(this.drawingPoints[i - 1].x, this.drawingPoints[i - 1].y);
+          } else {
+            this.context.moveTo(this.drawingPoints[i].x, this.drawingPoints[i].y);
+          }
+          this.context.lineTo(this.drawingPoints[i].x, this.drawingPoints[i].y);
+          this.context.closePath();
         }
-        this.context.lineTo(this.drawingPoints[i].x, this.drawingPoints[i].y);
-        this.context.closePath();
-      }
-      this.context.stroke();
+        this.context.stroke();
+
+     }
     }
-  }
 
   clearCanvas(event) {
     this.context.clearRect(0, 0, this.state.width, this.state.height);
